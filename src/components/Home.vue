@@ -2,10 +2,10 @@
   <v-container>
     <v-layout row wrap>
       <v-flex xs12 sm6 class="text-xs-center text-sm-right"> 
-        <v-btn large router to="/meetups" >Explore Meetups</v-btn>
+        <v-btn large router to="/convocatorias" >Explore Convocatorias</v-btn>
       </v-flex>
       <v-flex xs12 sm6 class="text-xs-center text-sm-left"> 
-        <v-btn large router to="/meetup/new">Organize Meetup</v-btn>
+        <v-btn large router to="/convocatoria/new">Organize Convocatoria</v-btn>
       </v-flex>
     </v-layout>
     <v-layout>
@@ -22,11 +22,11 @@
       <v-flex xs12>
         <v-carousel style="cursor: pointer;" v-if="!loading">
           <v-carousel-item 
-            v-for="meetup in meetups" 
-            :src="meetup.imageUrl" 
-            :key="meetup.id" 
-            @click="onLoadMeetup(meetup.id)">
-            <div class="title">{{meetup.title}}
+            v-for="convocatoria in convocatorias" 
+            :src="convocatoria.imageUrl" 
+            :key="convocatoria.id" 
+            @click="onLoadConvocatoria(convocatoria.id)">
+            <div class="title">{{convocatoria.title}}
             </div>
           </v-carousel-item>
         </v-carousel>
@@ -34,7 +34,7 @@
     </v-layout>
     <v-layout row wrap class="mt-2">
       <v-flex xs12 class="text-xs-center"> 
-        <p>Join our awesome meetups!</p>
+        <p>Join our awesome convocatorias!</p>
       </v-flex>
     </v-layout>
   </v-container>
@@ -42,16 +42,16 @@
 <script>
   export default {
     computed: {
-      meetups () {
-        return this.$store.getters.featuredMeetups
+      convocatorias () {
+        return this.$store.getters.featuredConvocatorias
       },
       loading () {
         return this.$store.getters.loading
       }
     },
     methods: {
-      onLoadMeetup (id) {
-        this.$router.push('/meetups/' + id)
+      onLoadConvocatoria (id) {
+        this.$router.push('/convocatorias/' + id)
       }
     }
   }

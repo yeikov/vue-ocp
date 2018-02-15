@@ -11,10 +11,10 @@ import DateFilter from './filters/date'
 import { secret } from '../ignoreFileSession'
 import AlertComp from './components/Shared/Alert'
 // import AlertCmp from './components/Shared/Alert.vue' ??
-import EditMeetupDetailsDialog from './components/Meetup/Edit/EditMeetupDetailsDialog.vue'
-import EditMeetupDateDialog from './components/Meetup/Edit/EditMeetupDateDialog.vue'
-import EditMeetupTimeDialog from './components/Meetup/Edit/EditMeetupTimeDialog.vue'
-import RegisterDialog from './components/Meetup/Registration/RegisterDialog.vue'
+import EditConvocatoriaDetailsDialog from './components/Convocatoria/Edit/EditConvocatoriaDetailsDialog.vue'
+import EditConvocatoriaDateDialog from './components/Convocatoria/Edit/EditConvocatoriaDateDialog.vue'
+import EditConvocatoriaTimeDialog from './components/Convocatoria/Edit/EditConvocatoriaTimeDialog.vue'
+import RegisterDialog from './components/Convocatoria/Registration/RegisterDialog.vue'
 
 /* ignoreFileSession.js inscrito en gitignore. contiene:
 export const secret = {apiKey: '****',
@@ -38,10 +38,10 @@ Vue.use(Vuetify, {
 })
 Vue.filter('date', DateFilter)
 Vue.component('app-alert', AlertComp)
-Vue.component('app-edit-meetup-details-dialog', EditMeetupDetailsDialog)
-Vue.component('app-edit-meetup-date-dialog', EditMeetupDateDialog)
-Vue.component('app-edit-meetup-time-dialog', EditMeetupTimeDialog)
-Vue.component('app-register-meetup-dialog', RegisterDialog)
+Vue.component('app-edit-convocatoria-details-dialog', EditConvocatoriaDetailsDialog)
+Vue.component('app-edit-convocatoria-date-dialog', EditConvocatoriaDateDialog)
+Vue.component('app-edit-convocatoria-time-dialog', EditConvocatoriaTimeDialog)
+Vue.component('app-register-convocatoria-dialog', RegisterDialog)
 
 Vue.config.productionTip = false
 
@@ -59,6 +59,6 @@ new Vue({
         this.$store.dispatch('fetchUserData')
       }
     })
-    this.$store.dispatch('loadMeetups')
+    this.$store.dispatch('loadConvocatorias')
   }
 })

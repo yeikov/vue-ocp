@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
-import Meetups from '@/components/Meetup/Meetups'
-import Meetup from '@/components/Meetup/Meetup'
-import CreateMeetup from '@/components/Meetup/CreateMeetup'
+import Convocatorias from '@/components/Convocatoria/Convocatorias'
+import Convocatoria from '@/components/Convocatoria/Convocatoria'
+import CreateConvocatoria from '@/components/Convocatoria/CreateConvocatoria'
 import Profile from '@/components/User/Profile'
 import Signin from '@/components/User/Signin'
 import Signup from '@/components/User/Signup'
@@ -19,21 +19,21 @@ export default new Router({
       component: Home
     },
     {
-      path: '/meetups',
-      name: 'Meetups',
-      component: Meetups
+      path: '/convocatorias',
+      name: 'Convocatorias',
+      component: Convocatorias
     },
     {
-      path: '/meetup/new',
-      name: 'CreateMeetup',
-      component: CreateMeetup,
+      path: '/convocatoria/new',
+      name: 'CreateConvocatoria',
+      component: CreateConvocatoria,
       beforeEnter: AuthGuard
     },
     {
-      path: '/meetups/:id',
-      name: 'Meetup',
+      path: '/convocatorias/:id',
+      name: 'Convocatoria',
       props: true,
-      component: Meetup
+      component: Convocatoria
     },
     {
       path: '/profile',

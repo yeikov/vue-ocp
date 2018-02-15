@@ -30,7 +30,7 @@
       </v-toolbar-side-icon>
       <v-toolbar-title>
       <router-link to="/" tag="span" style="cursor:pointer">
-      DevMeetup
+      OCP
       </router-link></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
@@ -72,8 +72,8 @@
         ]
         if (this.userIsAuthenticated) {
           menuItems = [
-            {icon: 'supervisor_account', title: 'View meetups', link: '/meetups'},
-            {icon: 'room', title: 'Organize Meetup', link: '/meetup/new'},
+            {icon: 'supervisor_account', title: 'Ver convocatorias', link: '/convocatorias'},
+            {icon: 'room', title: 'Nueva convocatoria', link: '/convocatoria/new'},
             {icon: 'person', title: 'Profile', link: '/profile'}
           ]
         }

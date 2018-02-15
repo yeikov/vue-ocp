@@ -5,17 +5,17 @@ export default {
     user: null
   },
   mutations: {
-    registerUserForMeetup (state, payload) {
+    registerUserForConvocatoria (state, payload) {
       const id = payload.id
-      if (state.user.registeredMeetups.findIndex(meetup => meetup.id === id) >= 0) {
+      if (state.user.registeredConvocatorias.findIndex(convocatoria => convocatoria.id === id) >= 0) {
         return
       }
-      state.user.registeredMeetups.push(id)
+      state.user.registeredConvocatorias.push(id)
       state.user.fbKeys[id] = payload.fbKey
     },
-    unregisterUserFromMeetup (state, payload) {
-      const registeredMeetups = state.user.registeredMeetups
-      registeredMeetups.splice(registeredMeetups.findIndex(meetup => meetup.id === payload), 1)
+    unregisterUserFromConvocatoria (state, payload) {
+      const registeredConvocatorias = state.user.registeredConvocatorias
+      registeredConvocatorias.splice(registeredConvocatorias.findIndex(convocatoria => convocatoria.id === payload), 1)
       Reflect.deleteProperty(state.user.fbKeys, payload)
     },
     setUser (state, payload) {
@@ -23,21 +23,21 @@ export default {
     }
   },
   actions: {
-    registerUserForMeetup ({commit, getters}, payload) {
+    registerUserForConvocatoria ({commit, getters}, payload) {
       commit('setLoading', true)
       const user = getters.user
       firebase.database().ref('/users/' + user.id).child('/registrations/')
         .push(payload)
         .then(data => {
           commit('setLoading', false)
-          commit('registerUserForMeetup', {id: payload, fbKey: data.key})
+          commit('registerUserForConvocatoria', {id: payload, fbKey: data.key})
         })
         .catch(error => {
           console.log(error)
           commit('setLoading', false)
         })
     },
-    unregisterUserFromMeetup ({commit, getters}, payload) {
+    unregisterUserFromConvocatoria ({commit, getters}, payload) {
       commit('setLoading', true)
       const user = getters.user
       if (!user.fbKeys) { return }
@@ -46,7 +46,7 @@ export default {
         .remove()
         .then(() => {
           commit('setLoading', false)
-          commit('unregisterUserFromMeetup', payload)
+          commit('unregisterUserFromConvocatoria', payload)
         })
         .catch(error => {
           console.log(error)
@@ -63,7 +63,7 @@ export default {
             const newUser = {
               id: user.uid,
               fbKeys: {},
-              registeredMeetups: []
+              registeredConvocatorias: []
             }
             commit('setUser', newUser)
           }
@@ -85,7 +85,7 @@ export default {
             const sInUser = {
               id: user.uid,
               fbKeys: {},
-              registeredMeetups: []
+              registeredConvocatorias: []
             }
             commit('setLoading', false)
             commit('setUser', sInUser)
@@ -103,7 +103,7 @@ export default {
       commit('setUser', {
         id: payload.uid,
         fbKeys: {},
-        registeredMeetups: []
+        registeredConvocatorias: []
       })
     },
     fetchUserData ({commit, getters}) {
@@ -111,15 +111,15 @@ export default {
       firebase.database().ref('/users/' + getters.user.id + '/registrations/').once('value')
         .then(data => {
           const dataPairs = data.val()
-          let registeredMeetups = []
+          let registeredConvocatorias = []
           let swappedPairs = {}
           for (let key in dataPairs) {
-            registeredMeetups.push(dataPairs[key])
+            registeredConvocatorias.push(dataPairs[key])
             swappedPairs[dataPairs[key]] = key
           }
           const updatedUser = {
             id: getters.user.id,
-            registeredMeetups: registeredMeetups,
+            registeredConvocatorias: registeredConvocatorias,
             fbKeys: swappedPairs
           }
           commit('setLoading', false)
