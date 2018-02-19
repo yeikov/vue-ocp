@@ -59,6 +59,6 @@ new Vue({
         this.$store.dispatch('fetchUserData')
       }
     })
-    this.$store.dispatch('loadConvocatorias')
+    this.$store.dispatch('loadConvocatoriasUsuario')
   }
 })

@@ -85,7 +85,9 @@
     },
     methods: {
       onLogout () {
+      console.log(this.$store.getters.user)
         this.$store.dispatch('logout')
+         console.log('logout')
       }
     }
   }

@@ -19,10 +19,6 @@
               <app-edit-convocatoria-details-dialog :convocatoria="convocatoria"></app-edit-convocatoria-details-dialog>
             </template>
           </v-card-title>
-          <v-card-media
-              :src="convocatoria.imageUrl"
-              height="400px"  
-          ></v-card-media>
           <v-card-text class="">
             <div class="info--text">{{ convocatoria.date | date }} - {{ convocatoria.location }}</div>
             <div>

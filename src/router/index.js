@@ -21,7 +21,8 @@ export default new Router({
     {
       path: '/convocatorias',
       name: 'Convocatorias',
-      component: Convocatorias
+      component: Convocatorias,
+      beforeEnter: AuthGuard
     },
     {
       path: '/convocatoria/new',

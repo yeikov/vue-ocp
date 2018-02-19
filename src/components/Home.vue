@@ -19,20 +19,6 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap class="mt-2">
-      <v-flex xs12>
-        <v-carousel style="cursor: pointer;" v-if="!loading">
-          <v-carousel-item 
-            v-for="convocatoria in convocatorias" 
-            :src="convocatoria.imageUrl" 
-            :key="convocatoria.id" 
-            @click="onLoadConvocatoria(convocatoria.id)">
-            <div class="title">{{convocatoria.title}}
-            </div>
-          </v-carousel-item>
-        </v-carousel>
-      </v-flex>
-    </v-layout>
-    <v-layout row wrap class="mt-2">
       <v-flex xs12 class="text-xs-center"> 
         <p>Join our awesome convocatorias!</p>
       </v-flex>

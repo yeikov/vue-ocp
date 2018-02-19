@@ -27,7 +27,7 @@
                 v-model="editedDescription"
                 id="description"
                 multi-line
-                required>  
+                >  
               </v-text-field>
             </v-card-text>
           </v-flex>

@@ -76,7 +76,7 @@ export default {
           }
         )
     },
-    signUserIn ({commit}, payload) {
+    signUserIn ({commit, getters}, payload) {
       commit('setLoading', true)
       commit('clearError')
       firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
@@ -89,6 +89,7 @@ export default {
             }
             commit('setLoading', false)
             commit('setUser', sInUser)
+            // commit('setConvocatoriasUsuario')
           }
         )
         .catch(
