@@ -89,7 +89,6 @@ export default {
             }
             commit('setLoading', false)
             commit('setUser', sInUser)
-            // commit('setConvocatoriasUsuario')
           }
         )
         .catch(

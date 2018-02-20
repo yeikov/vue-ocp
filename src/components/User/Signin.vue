@@ -34,7 +34,6 @@
                   </v-text-field>
                 </v-flex>
               </v-layout>
-              
               <v-layout>
                 <v-flex xs12>
                   <v-btn type="submit" :disabled="loading" :loading="loading">
@@ -75,7 +74,7 @@
     watch: {
       user (value) {
         if (value !== null && value !== undefined) {
-          this.$router.push('/')
+          this.$router.push('/convocatorias')
         }
       }
     },

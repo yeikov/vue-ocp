@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-layout row wrap>
+    <v-layout row wrap v-if="userIsLogged">
       <v-flex xs12 sm6 class="text-xs-center text-sm-right"> 
         <v-btn large router to="/convocatorias" >Explore Convocatorias</v-btn>
       </v-flex>
@@ -33,6 +33,9 @@
       },
       loading () {
         return this.$store.getters.loading
+      },
+      userIsLogged () {
+        return this.$store.getters.user
       }
     },
     methods: {

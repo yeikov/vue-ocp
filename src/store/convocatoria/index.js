@@ -74,35 +74,6 @@ export default {
           commit('setLoading', false)
         })
     }, */
-    loadConvocatoriasUsuario ({commit, getters}) {
-      console.log('va')
-      commit('setLoading', true)
-      firebase.database().ref('convocatorias').once('value')
-        .then((data) => {
-          const convocatorias = []
-          const obj = data.val()
-          console.log('loadConvocatoriasUsuario')
-          console.log(getters.user.id)
-          for (let key in obj) {
-            if (obj[key].creatorId === getters.user.id) {
-              convocatorias.push({
-                id: key,
-                title: obj[key].title,
-                location: obj[key].location,
-                date: obj[key].date,
-                description: obj[key].description,
-                creatorId: obj[key].creatorId
-              })
-            }
-          }
-          commit('setConvocatoriasUsuario', convocatorias)
-          commit('setLoading', false)
-        })
-        .catch((error) => {
-          console.log(error)
-          commit('setLoading', false)
-        })
-    },
     createConvocatoria ({commit, getters}, payload) {
       const convocatoria = {
         title: payload.title,
@@ -149,6 +120,36 @@ export default {
           console.log(error)
           commit('setLoading', false)
         })
+    },
+    loadConvocatoriasUsuario ({commit, getters}) {
+      console.log('va')
+      commit('setLoading', true)
+      firebase.database().ref('convocatorias').once('value')
+        .then((data) => {
+          const convocatorias = []
+          const obj = data.val()
+          console.log('loadConvocatoriasUsuario')
+          console.log(getters.user.id)
+          for (let key in obj) {
+            if (obj[key].creatorId === getters.user.id) {
+              convocatorias.push({
+                id: key,
+                title: obj[key].title,
+                location: obj[key].location,
+                date: obj[key].date,
+                description: obj[key].description,
+                creatorId: obj[key].creatorId
+              })
+            }
+          }
+          console.log(getters.user.id)
+          commit('setConvocatoriasUsuario', convocatorias)
+          commit('setLoading', false)
+        })
+        .catch((error) => {
+          console.log(error)
+          commit('setLoading', false)
+        })
     }
   },
   getters: {
@@ -158,7 +159,7 @@ export default {
         return convocatoriaA.date > convocatoriaB.date
       })
     },
-    convocatoriasUsuario (state, getters) {
+    convocatoriasUsuario (state, getters, actions) {
       return state.loadedConvocatorias.sort((convocatoriaA, convocatoriaB) => {
         return convocatoriaA.date > convocatoriaB.date
       })
