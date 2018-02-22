@@ -48,48 +48,20 @@ export default {
     }
   },
   actions: {
-    /* loadConvocatorias ({commit}) {
-      commit('setLoading', true)
-      firebase.database().ref('convocatorias').once('value')
-        .then((data) => {
-          const convocatorias = []
-          const obj = data.val()
-          console.log('loadConvocatorias')
-          console.log(obj)
-          for (let key in obj) {
-            convocatorias.push({
-              id: key,
-              title: obj[key].title,
-              location: obj[key].location,
-              date: obj[key].date,
-              description: obj[key].description,
-              creatorId: obj[key].creatorId
-            })
-          }
-          commit('setLoadedConvocatorias', convocatorias)
-          commit('setLoading', false)
-        })
-        .catch((error) => {
-          console.log(error)
-          commit('setLoading', false)
-        })
-    }, */
     loadConvocatoriasUsuario ({commit, getters}) {
-      console.log('va')
       commit('setLoading', true)
       firebase.database().ref('convocatorias').once('value')
         .then((data) => {
           const convocatorias = []
           const obj = data.val()
-          console.log('loadConvocatoriasUsuario')
-          console.log(getters.user.id)
           for (let key in obj) {
             if (obj[key].creatorId === getters.user.id) {
               convocatorias.push({
                 id: key,
                 title: obj[key].title,
                 location: obj[key].location,
-                date: obj[key].date,
+                dayOfWeek: obj[key].dayOfWeek,
+                time: obj[key].time,
                 description: obj[key].description,
                 creatorId: obj[key].creatorId
               })
@@ -109,7 +81,15 @@ export default {
         title: payload.title,
         location: payload.location,
         description: payload.description,
-        date: payload.date.toISOString(),
+        modificationDate: payload.modificationDate, // date: payload.date.toISOString(),
+        creationDate: payload.creationDate,
+        dayOfWeek: payload.dayOfWeek,
+        time: payload.time,
+        annualExceptions: payload.annualExceptions,
+        punctualExceptions: payload.punctualExceptions,
+        annualAmendments: payload.annualAmendments,
+        subscribed: payload.subscribed,
+        enrolment: payload.enrolment,
         creatorId: getters.user.id
       }
       let key

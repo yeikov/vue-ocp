@@ -19,13 +19,21 @@
               <app-edit-convocatoria-details-dialog :convocatoria="convocatoria"></app-edit-convocatoria-details-dialog>
             </template>
           </v-card-title>
-          <v-card-text class="">
+          <!-- <v-card-text class="">
             <div class="info--text">{{ convocatoria.date | date }} - {{ convocatoria.location }}</div>
             <div>
               <app-edit-convocatoria-date-dialog :convocatoria="convocatoria" v-if="userIsCreator"></app-edit-convocatoria-date-dialog>
               <app-edit-convocatoria-time-dialog :convocatoria="convocatoria" v-if="userIsCreator"></app-edit-convocatoria-time-dialog>
             </div>
             <div>{{ convocatoria.description }}</div>
+          </v-card-text> -->
+          <v-card-text>
+              
+              <p>{{convocatoria.location}}</p>
+              <p>{{convocatoria.description}}</p>
+              <p>{{convocatoria.dayOfWeek}}</p>
+              <p>{{convocatoria.hour}}</p>
+              <p>Creation: {{ creationDate | date }}</p>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -40,25 +48,25 @@
 </template>
 
 <script>
-export default {
-  props: ['id'],
-  computed: {
-    convocatoria () {
-      return this.$store.getters.loadedConvocatoria(this.id)
-    },
-    userIsAuthenticated () {
-      return this.$store.getters.user !== null && this.$store.getters.user !== undefined
-    },
-    userIsCreator () {
-      if (!this.userIsAuthenticated) {
-        return false
+  export default {
+    props: ['id'],
+    computed: {
+      convocatoria () {
+        return this.$store.getters.loadedConvocatoria(this.id)
+      },
+      userIsAuthenticated () {
+        return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+      },
+      userIsCreator () {
+        if (!this.userIsAuthenticated) {
+          return false
+        }
+        return this.$store.getters.user.id === this.convocatoria.creatorId
+      },
+      loading () {
+        return this.$store.getters.loading
       }
-      return this.$store.getters.user.id === this.convocatoria.creatorId
-    },
-    loading () {
-      return this.$store.getters.loading
     }
   }
-}
 </script>
 
